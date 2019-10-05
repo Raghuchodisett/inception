@@ -58,6 +58,7 @@ import de.tudarmstadt.ukp.inception.recommendation.api.evaluation.EvaluationResu
 import de.tudarmstadt.ukp.inception.recommendation.api.evaluation.IncrementalSplitter;
 import de.tudarmstadt.ukp.inception.recommendation.api.evaluation.PercentageBasedSplitter;
 import de.tudarmstadt.ukp.inception.recommendation.api.model.Recommender;
+import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationException;
 import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommenderContext;
 import de.tudarmstadt.ukp.inception.support.test.recommendation.RecommenderTestHelper;
 
@@ -82,7 +83,7 @@ public class OpenNlpDoccatRecommenderTest
     }
 
     @Test
-    public void thatTrainingWorks() throws Exception
+    public void thatTrainingWorks() throws IOException, UIMAException, RecommendationException 
     {
         OpenNlpDoccatRecommender sut = new OpenNlpDoccatRecommender(recommender, traits);
         List<CAS> casList = loadArxivData();
@@ -95,7 +96,7 @@ public class OpenNlpDoccatRecommenderTest
     }
 
     @Test
-    public void thatPredictionWorks() throws Exception
+    public void thatPredictionWorks() throws Exception 
     {
         OpenNlpDoccatRecommender sut = new OpenNlpDoccatRecommender(recommender, traits);
         List<CAS> casList = loadArxivData();
@@ -114,7 +115,7 @@ public class OpenNlpDoccatRecommenderTest
     }
 
     @Test
-    public void thatEvaluationWorks() throws Exception
+    public void thatEvaluationWorks() throws IOException, UIMAException, RecommendationException 
     {
         DataSplitter splitStrategy = new PercentageBasedSplitter(0.8, 10);
         OpenNlpDoccatRecommender sut = new OpenNlpDoccatRecommender(recommender, traits);
@@ -139,7 +140,7 @@ public class OpenNlpDoccatRecommenderTest
     }
 
     @Test
-    public void thatIncrementalNerEvaluationWorks() throws Exception
+    public void thatIncrementalNerEvaluationWorks() throws IOException, UIMAException, RecommendationException 
     {
         IncrementalSplitter splitStrategy = new IncrementalSplitter(0.8, 250, 10);
         OpenNlpDoccatRecommender sut = new OpenNlpDoccatRecommender(recommender, traits);

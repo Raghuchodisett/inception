@@ -49,6 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.inception.recommendation.api.model.Recommender;
+import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationException;
 import de.tudarmstadt.ukp.inception.recommendation.imls.lapps.traits.LappsGridRecommenderTraits;
 import de.tudarmstadt.ukp.inception.recommendation.imls.lapps.traits.LappsGridRecommenderTraitsEditor;
 import de.tudarmstadt.ukp.inception.recommendation.imls.lapps.traits.LappsGridService;
@@ -61,7 +62,7 @@ public class LappsGridRecommenderConformityTest
 {
     @Test
     @Parameters(method = "getNerServices")
-    public void testNerConformity(LappsGridService aService) throws Exception
+    public void testNerConformity(LappsGridService aService) throws Exception 
     {
         CAS cas = loadData();
 
@@ -80,7 +81,7 @@ public class LappsGridRecommenderConformityTest
 
     @Test
     @Parameters(method = "getPosServices")
-    public void testPosConformity(LappsGridService aService) throws Exception
+    public void testPosConformity(LappsGridService aService) throws Exception 
     {
         CAS cas = loadData();
 
@@ -97,7 +98,7 @@ public class LappsGridRecommenderConformityTest
         softly.assertAll();
     }
 
-    private void predict(String aUrl, CAS aCas) throws Exception
+    private void predict(String aUrl, CAS aCas) throws RecommendationException 
     {
         LappsGridRecommenderTraits traits = new LappsGridRecommenderTraits();
         traits.setUrl(aUrl);
@@ -141,8 +142,8 @@ public class LappsGridRecommenderConformityTest
         return services.get("pos");
     }
 
-    private static Map<String, List<LappsGridService>> loadPredefinedServicesData()
-            throws Exception
+    private static Map<String, List<LappsGridService>> loadPredefinedServicesData() throws IOException
+            
     {
         try (InputStream is = LappsGridRecommenderTraitsEditor
                 .class.getResourceAsStream("services.json")) {

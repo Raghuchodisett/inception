@@ -44,6 +44,7 @@ import de.tudarmstadt.ukp.clarin.webanno.model.AnnotationFeature;
 import de.tudarmstadt.ukp.clarin.webanno.model.AnnotationLayer;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.inception.recommendation.api.model.Recommender;
+import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationException;
 import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommenderContext;
 import de.tudarmstadt.ukp.inception.recommendation.imls.lapps.traits.LappsGridRecommenderTraits;
 import okhttp3.mockwebserver.Dispatcher;
@@ -76,14 +77,14 @@ public class LappsRecommenderIntegrationTest
     }
 
     @After
-    public void tearDown() throws Exception
+    public void tearDown() throws IOException 
     {
         server.shutdown();
     }
 
     @Test
     @Ignore
-    public void thatPredictingPosWorks() throws Exception
+    public void thatPredictingPosWorks() throws IOException, UIMAException, RecommendationException 
     {
         RecommenderContext context = new RecommenderContext();
         CAS cas = loadData();

@@ -30,6 +30,7 @@ import static org.assertj.core.api.Assertions.contentOf;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -111,13 +112,13 @@ public class GazeteerServiceImplTest
     }
     
     @After
-    public void tearDown() throws Exception
+    public void tearDown() 
     {
         testEntityManager.clear();
     }
 
     @Test
-    public void thatCreateListAndDeleteGazeteerWorks() throws Exception
+    public void thatCreateListAndDeleteGazeteerWorks() throws IOException 
     {
         // Add first gazeteer
         Gazeteer gaz1 = new Gazeteer("gaz1", rec1);
@@ -156,7 +157,7 @@ public class GazeteerServiceImplTest
     }
     
     @Test
-    public void thatUpdatingGazeteerWorks() throws Exception
+    public void thatUpdatingGazeteerWorks() 
     {
         Gazeteer gaz = new Gazeteer("foo", rec1);
         sut.createOrUpdateGazeteer(gaz);
@@ -176,7 +177,7 @@ public class GazeteerServiceImplTest
     }
     
     @Test
-    public void thatImportGazeteerWorks() throws Exception
+    public void thatImportGazeteerWorks() throws FileNotFoundException, IOException 
     {
         Gazeteer gaz = new Gazeteer("gaz", rec1);
         sut.createOrUpdateGazeteer(gaz);
@@ -212,7 +213,7 @@ public class GazeteerServiceImplTest
     }
     
     @Test
-    public void thatGazeteerCommentLineIsIgnored() throws Exception
+    public void thatGazeteerCommentLineIsIgnored() throws IOException 
     {
         Gazeteer gaz = new Gazeteer("gaz", rec1);
         
@@ -228,7 +229,7 @@ public class GazeteerServiceImplTest
     }
 
     @Test
-    public void thatInvalidGazeteerGeneratesException() throws Exception
+    public void thatInvalidGazeteerGeneratesException() 
     {
         Gazeteer gaz = new Gazeteer("gaz", rec1);
         

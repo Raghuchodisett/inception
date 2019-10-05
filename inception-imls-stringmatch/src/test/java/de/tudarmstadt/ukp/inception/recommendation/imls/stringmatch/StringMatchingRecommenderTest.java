@@ -56,6 +56,7 @@ import de.tudarmstadt.ukp.inception.recommendation.api.evaluation.EvaluationResu
 import de.tudarmstadt.ukp.inception.recommendation.api.evaluation.IncrementalSplitter;
 import de.tudarmstadt.ukp.inception.recommendation.api.evaluation.PercentageBasedSplitter;
 import de.tudarmstadt.ukp.inception.recommendation.api.model.Recommender;
+import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationException;
 import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommenderContext;
 import de.tudarmstadt.ukp.inception.recommendation.imls.stringmatch.model.GazeteerEntry;
 import de.tudarmstadt.ukp.inception.support.test.recommendation.RecommenderTestHelper;
@@ -135,7 +136,7 @@ public class StringMatchingRecommenderTest
                 .containsOnlyNulls();
     }
 
-    private CAS getTestCasNoLabelLabels() throws Exception
+    private CAS getTestCasNoLabelLabels() throws IOException, UIMAException
     {
         Dataset ds = loader.load("germeval2014-de", CONTINUE);
         CAS cas = loadData(ds, ds.getDataFiles()[0]).get(0);
@@ -148,7 +149,7 @@ public class StringMatchingRecommenderTest
     }
 
     @Test
-    public void thatPredictionWithPretrainigWorks() throws Exception
+    public void thatPredictionWithPretrainigWorks() throws Exception 
     {
         StringMatchingRecommender sut = new StringMatchingRecommender(recommender, traits);
         List<CAS> casList = loadDevelopmentData();
@@ -267,7 +268,7 @@ public class StringMatchingRecommenderTest
     }
     
     @Test
-    public void thatEvaluationSkippingWorks() throws Exception
+    public void thatEvaluationSkippingWorks() 
     {
         DataSplitter splitStrategy = new PercentageBasedSplitter(0.8, 10);
         StringMatchingRecommender sut = new StringMatchingRecommender(recommender, traits);

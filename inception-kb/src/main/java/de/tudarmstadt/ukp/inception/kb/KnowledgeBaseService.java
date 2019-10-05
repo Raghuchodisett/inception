@@ -491,7 +491,7 @@ public interface KnowledgeBaseService
     /**
      * Can be used to re-index a local KB in case the full text index is corrupt.
      */
-    void rebuildFullTextIndex(KnowledgeBase aKb) throws Exception;
+    void rebuildFullTextIndex(KnowledgeBase aKb) ;
     
     /**
      * Read the concept with the given identifier from the given knowledge base with a 

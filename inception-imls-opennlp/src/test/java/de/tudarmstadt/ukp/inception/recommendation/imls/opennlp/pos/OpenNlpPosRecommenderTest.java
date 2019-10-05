@@ -46,6 +46,7 @@ import de.tudarmstadt.ukp.inception.recommendation.api.evaluation.EvaluationResu
 import de.tudarmstadt.ukp.inception.recommendation.api.evaluation.IncrementalSplitter;
 import de.tudarmstadt.ukp.inception.recommendation.api.evaluation.PercentageBasedSplitter;
 import de.tudarmstadt.ukp.inception.recommendation.api.model.Recommender;
+import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationException;
 import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommenderContext;
 import de.tudarmstadt.ukp.inception.support.test.recommendation.RecommenderTestHelper;
 
@@ -70,7 +71,7 @@ public class OpenNlpPosRecommenderTest
     }
 
     @Test
-    public void thatTrainingWorks() throws Exception
+    public void thatTrainingWorks() throws IOException, UIMAException, RecommendationException 
     {
         OpenNlpPosRecommender sut = new OpenNlpPosRecommender(recommender, traits);
         List<CAS> casList = loadDevelopmentData();
@@ -83,7 +84,7 @@ public class OpenNlpPosRecommenderTest
     }
 
     @Test
-    public void thatPredictionWorks() throws Exception
+    public void thatPredictionWorks() throws Exception 
     {
         OpenNlpPosRecommender sut = new OpenNlpPosRecommender(recommender, traits);
         List<CAS> casList = loadDevelopmentData();
@@ -127,7 +128,7 @@ public class OpenNlpPosRecommenderTest
     }
 
     @Test
-    public void thatIncrementalPosEvaluationWorks() throws Exception
+    public void thatIncrementalPosEvaluationWorks() throws IOException, UIMAException, RecommendationException
     {
         IncrementalSplitter splitStrategy = new IncrementalSplitter(0.8, 250, 10);
         OpenNlpPosRecommender sut = new OpenNlpPosRecommender(recommender, traits);

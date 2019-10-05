@@ -29,6 +29,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
@@ -66,7 +67,7 @@ public class LoggedEventExporterTest
     private LoggedEventExporter sut;
 
     @Before
-    public void setUp() throws Exception
+    public void setUp() throws IOException
     {
         initMocks(this);
 
@@ -181,8 +182,8 @@ public class LoggedEventExporterTest
         return asList(event1, event2, event3, event4);
     }
 
-    private ArgumentCaptor<LoggedEvent> runExportImportAndFetchEvents(ZipFile aZipFile)
-        throws Exception
+    private ArgumentCaptor<LoggedEvent> runExportImportAndFetchEvents(ZipFile aZipFile) throws Exception
+        
     {
         // Export the project
         ProjectExportRequest exportRequest = new ProjectExportRequest();

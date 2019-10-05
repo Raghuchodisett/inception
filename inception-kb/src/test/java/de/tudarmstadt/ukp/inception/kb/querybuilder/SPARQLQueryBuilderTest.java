@@ -253,9 +253,10 @@ public class SPARQLQueryBuilderTest
      * Checks that {@code SPARQLQueryBuilder#exists(RepositoryConnection, boolean)} can return 
      * {@code true} by querying for a list of all classes in {@link #DATA_CLASS_RDFS_HIERARCHY}
      * which contains a number of classes.
+     * @throws IOException 
      */
     @Test
-    public void thatExistsReturnsTrueWhenDataQueriedForExists() throws Exception
+    public void thatExistsReturnsTrueWhenDataQueriedForExists() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
 
@@ -268,9 +269,10 @@ public class SPARQLQueryBuilderTest
     /**
      * If the KB has no default language set, then only labels and descriptions with no language
      * at all should be returned.
+     * @throws IOException 
      */
     @Test
-    public void thatOnlyLabelsAndDescriptionsWithNoLanguageAreRetrieved() throws Exception
+    public void thatOnlyLabelsAndDescriptionsWithNoLanguageAreRetrieved() throws IOException 
     {
         kb.setDefaultLanguage(null);
         
@@ -326,9 +328,10 @@ public class SPARQLQueryBuilderTest
      * Checks that {@code SPARQLQueryBuilder#exists(RepositoryConnection, boolean)} can return 
      * {@code false} by querying for the parent of a root class in 
      * {@link #DATA_CLASS_RDFS_HIERARCHY} which does not exist.
+     * @throws IOException 
      */
     @Test
-    public void thatExistsReturnsFalseWhenDataQueriedForDoesNotExist() throws Exception
+    public void thatExistsReturnsFalseWhenDataQueriedForDoesNotExist() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
 
@@ -341,9 +344,10 @@ public class SPARQLQueryBuilderTest
     
     /**
      * Checks that an explicitly defined class can be retrieved using its identifier.
+     * @throws IOException 
      */
     @Test
-    public void thatExplicitClassCanBeRetrievedByItsIdentifier() throws Exception
+    public void thatExplicitClassCanBeRetrievedByItsIdentifier() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
 
@@ -372,9 +376,10 @@ public class SPARQLQueryBuilderTest
     /**
      * Checks that a either explicitly nor implicitly defined class can be retrieved using its 
      * identifier.
+     * @throws IOException 
      */
     @Test
-    public void thatNonClassCannotBeRetrievedByItsIdentifier() throws Exception
+    public void thatNonClassCannotBeRetrievedByItsIdentifier() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
 
@@ -387,9 +392,10 @@ public class SPARQLQueryBuilderTest
 
     /**
      * Checks that item information can be obtained for a given subject.
+     * @throws IOException 
      */
     @Test
-    public void thatCanRetrieveItemInfoForIdentifier() throws Exception
+    public void thatCanRetrieveItemInfoForIdentifier() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX,
                 DATA_LABELS_AND_DESCRIPTIONS_WITH_LANGUAGE);
@@ -410,7 +416,7 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void thatAllPropertiesCanBeRetrieved() throws Exception
+    public void thatAllPropertiesCanBeRetrieved() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_PROPERTIES);
         
@@ -440,8 +446,8 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void thatPropertyQueryLimitedToDescendantsDoesNotReturnOutOfScopeResults()
-        throws Exception
+    public void thatPropertyQueryLimitedToDescendantsDoesNotReturnOutOfScopeResults() throws IOException
+        
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_PROPERTIES);
         
@@ -496,7 +502,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void thatQueryLimitedToRootClassesDoesNotReturnOutOfScopeResults() throws Exception
+    public void thatQueryLimitedToRootClassesDoesNotReturnOutOfScopeResults() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
 
@@ -511,7 +517,7 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void thatQueryWithExplicitRootClassDoesNotReturnOutOfScopeResults() throws Exception
+    public void thatQueryWithExplicitRootClassDoesNotReturnOutOfScopeResults() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
 
@@ -529,7 +535,7 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void thatNonRootClassCanBeUsedAsExplicitRootClass() throws Exception
+    public void thatNonRootClassCanBeUsedAsExplicitRootClass() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
 
@@ -548,7 +554,7 @@ public class SPARQLQueryBuilderTest
                 .containsExactlyInAnyOrder("implicitRoot", "subclass2");
     }
     @Test
-    public void thatQueryLimitedToClassesDoesNotReturnInstances() throws Exception
+    public void thatQueryLimitedToClassesDoesNotReturnInstances() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
 
@@ -561,7 +567,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void thatQueryLimitedToInstancesDoesNotReturnClasses() throws Exception
+    public void thatQueryLimitedToInstancesDoesNotReturnClasses() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
 
@@ -574,7 +580,7 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void thatClassQueryLimitedToAnchestorsDoesNotReturnOutOfScopeResults() throws Exception
+    public void thatClassQueryLimitedToAnchestorsDoesNotReturnOutOfScopeResults() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
     
@@ -590,7 +596,7 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void thatClassQueryLimitedToParentsDoesNotReturnOutOfScopeResults() throws Exception
+    public void thatClassQueryLimitedToParentsDoesNotReturnOutOfScopeResults() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
     
@@ -605,7 +611,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void thatClassQueryLimitedToChildrenDoesNotReturnOutOfScopeResults() throws Exception
+    public void thatClassQueryLimitedToChildrenDoesNotReturnOutOfScopeResults() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
     
@@ -649,7 +655,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void thatClassQueryLimitedToDescendantsDoesNotReturnOutOfScopeResults() throws Exception
+    public void thatClassQueryLimitedToDescendantsDoesNotReturnOutOfScopeResults() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
     
@@ -744,7 +750,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void thatItemQueryLimitedToDescendantsDoesNotReturnOutOfScopeResults() throws Exception
+    public void thatItemQueryLimitedToDescendantsDoesNotReturnOutOfScopeResults() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_CLASS_RDFS_HIERARCHY);
 
@@ -760,7 +766,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelContainingAnyOf_RDF4J_withLanguage_noFTS() throws Exception
+    public void testWithLabelContainingAnyOf_RDF4J_withLanguage_noFTS() throws IOException 
     {
         kb.setFullTextSearchIri(null);
         
@@ -768,15 +774,15 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void testWithLabelContainingAnyOf_RDF4J_withLanguage_FTS() throws Exception
+    public void testWithLabelContainingAnyOf_RDF4J_withLanguage_FTS() throws IOException 
     {
         kb.setFullTextSearchIri(IriConstants.FTS_LUCENE);
         
         __testWithLabelContainingAnyOf_withLanguage(rdf4jLocalRepo);
     }
     
-    public void __testWithLabelContainingAnyOf_withLanguage(Repository aRepository)
-        throws Exception
+    public void __testWithLabelContainingAnyOf_withLanguage(Repository aRepository) throws IOException
+        
     {
         importDataFromString(TURTLE, TURTLE_PREFIX, DATA_LABELS_AND_DESCRIPTIONS_WITH_LANGUAGE);
 
@@ -873,7 +879,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelMatchingExactlyAnyOf_RDF4J_withLanguage_noFTS() throws Exception
+    public void testWithLabelMatchingExactlyAnyOf_RDF4J_withLanguage_noFTS() throws IOException 
     {
         kb.setFullTextSearchIri(null);
         
@@ -881,15 +887,15 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelMatchingExactlyAnyOf_RDF4J_withLanguage_FTS() throws Exception
+    public void testWithLabelMatchingExactlyAnyOf_RDF4J_withLanguage_FTS() throws IOException 
     {
         kb.setFullTextSearchIri(IriConstants.FTS_LUCENE);
         
         __testWithLabelMatchingExactlyAnyOf_withLanguage(rdf4jLocalRepo);
     }
 
-    public void __testWithLabelMatchingExactlyAnyOf_withLanguage(Repository aRepository)
-        throws Exception
+    public void __testWithLabelMatchingExactlyAnyOf_withLanguage(Repository aRepository) throws IOException
+        
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX,
                 DATA_LABELS_AND_DESCRIPTIONS_WITH_LANGUAGE);
@@ -910,7 +916,7 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void testWithLabelMatchingExactlyAnyOf_RDF4J_subproperty_noFTS() throws Exception
+    public void testWithLabelMatchingExactlyAnyOf_RDF4J_subproperty_noFTS() throws IOException 
     {
         kb.setFullTextSearchIri(null);
         kb.setSubPropertyIri(RDFS.SUBPROPERTYOF);
@@ -920,7 +926,7 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void testWithLabelMatchingExactlyAnyOf_RDF4J_subproperty_FTS() throws Exception
+    public void testWithLabelMatchingExactlyAnyOf_RDF4J_subproperty_FTS() throws IOException 
     {
         kb.setFullTextSearchIri(IriConstants.FTS_LUCENE);
         kb.setSubPropertyIri(RDFS.SUBPROPERTYOF);
@@ -929,8 +935,8 @@ public class SPARQLQueryBuilderTest
         __testWithLabelMatchingExactlyAnyOf_RDF4J_subproperty(rdf4jLocalRepo);
     }
     
-    public void __testWithLabelMatchingExactlyAnyOf_RDF4J_subproperty(Repository aRepository)
-        throws Exception
+    public void __testWithLabelMatchingExactlyAnyOf_RDF4J_subproperty(Repository aRepository) throws IOException
+        
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, LABEL_SUBPROPERTY);
         
@@ -965,7 +971,7 @@ public class SPARQLQueryBuilderTest
         __testWithLabelStartingWith_RDF4J_withoutLanguage();
     }
 
-    public void __testWithLabelStartingWith_RDF4J_withoutLanguage() throws Exception
+    public void __testWithLabelStartingWith_RDF4J_withoutLanguage() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_LABELS_WITHOUT_LANGUAGE);
     
@@ -984,7 +990,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelStartingWith_RDF4J_withLanguage_noFTS() throws Exception
+    public void testWithLabelStartingWith_RDF4J_withLanguage_noFTS() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_LABELS_AND_DESCRIPTIONS_WITH_LANGUAGE);
 
@@ -1006,7 +1012,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelStartingWith_RDF4J_withLanguage_FTS_1() throws Exception
+    public void testWithLabelStartingWith_RDF4J_withLanguage_FTS_1() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_LABELS_AND_DESCRIPTIONS_WITH_LANGUAGE);
 
@@ -1030,7 +1036,7 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void testWithLabelStartingWith_RDF4J_withLanguage_FTS_2() throws Exception
+    public void testWithLabelStartingWith_RDF4J_withLanguage_FTS_2() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX, DATA_LABELS_AND_DESCRIPTIONS_WITH_LANGUAGE);
 
@@ -1054,7 +1060,7 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void testWithLabelStartingWith_RDF4J_withLanguage_FTS_3() throws Exception
+    public void testWithLabelStartingWith_RDF4J_withLanguage_FTS_3() throws IOException 
     {
         importDataFromString(RDFFormat.TURTLE, TURTLE_PREFIX,
                 DATA_LABELS_AND_DESCRIPTIONS_WITH_LANGUAGE);
@@ -1072,7 +1078,7 @@ public class SPARQLQueryBuilderTest
     }
     
     @Test
-    public void testWithLabelStartingWith_Virtuoso_withLanguage_FTS_1() throws Exception
+    public void testWithLabelStartingWith_Virtuoso_withLanguage_FTS_1() 
     {
         assertIsReachable(ukpVirtuosoRepo);
         
@@ -1092,7 +1098,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelStartingWith_Virtuoso_withLanguage_FTS_2() throws Exception
+    public void testWithLabelStartingWith_Virtuoso_withLanguage_FTS_2() 
     {
         assertIsReachable(ukpVirtuosoRepo);
         
@@ -1113,7 +1119,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelStartingWith_Virtuoso_withLanguage_FTS_3() throws Exception
+    public void testWithLabelStartingWith_Virtuoso_withLanguage_FTS_3() 
     {
         assertIsReachable(ukpVirtuosoRepo);
         
@@ -1134,7 +1140,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelStartingWith_Virtuoso_withLanguage_FTS_4() throws Exception
+    public void testWithLabelStartingWith_Virtuoso_withLanguage_FTS_4() 
     {
         assertIsReachable(ukpVirtuosoRepo);
         
@@ -1233,7 +1239,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelMatchingExactlyAnyOf_Wikidata_noFTS() throws Exception
+    public void testWithLabelMatchingExactlyAnyOf_Wikidata_noFTS() 
     {
         assertIsReachable(wikidata);
         
@@ -1308,7 +1314,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelStartingWith_HUCIT_noFTS() throws Exception
+    public void testWithLabelStartingWith_HUCIT_noFTS() 
     {
         assertIsReachable(hucit);
         
@@ -1326,7 +1332,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelStartingWith_onlyDescendants_HUCIT_noFTS() throws Exception
+    public void testWithLabelStartingWith_onlyDescendants_HUCIT_noFTS() 
     {
         assertIsReachable(hucit);
         
@@ -1473,7 +1479,7 @@ public class SPARQLQueryBuilderTest
     }
 
     @Test
-    public void testWithLabelContainingAnyOf_RDF4J_pets_ttl() throws Exception
+    public void testWithLabelContainingAnyOf_RDF4J_pets_ttl() throws IOException 
     {
         importDataFromFile("src/test/resources/data/pets.ttl");
 
